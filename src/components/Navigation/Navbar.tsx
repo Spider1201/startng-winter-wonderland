@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
 import { FairyLights } from './FairyLights';
-import type { ThemeMode } from '../../types';
+import type { ThemeMode, SeasonalMode } from '../../types';
 
 interface NavbarProps {
   isWinterActive: boolean;
   theme: ThemeMode;
   toggleTheme: () => void;
   onBulbClick?: (index: number) => void;
+  mode?: SeasonalMode;
+  setMode?: (mode: SeasonalMode) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   isWinterActive,
   theme,
   toggleTheme,
-  onBulbClick
+  onBulbClick,
+  setMode
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
+  const handleToggleWinter = () => {
+    if (!setMode) return;
+    setMode(isWinterActive ? 'normal-force' : 'winter-preview');
+  };
+
   return (
-    <header className="nav-wrapper" style={{ position: 'sticky', top: 0, zIndex: 40 }}>
-      {/* Fairy Lights along top edge when festive */}
+    <header className="nav-wrapper" style={{ position: 'sticky', top: 0, zIndex: 40, width: '100%' }}>
+      {/* Fairy Lights draped along top edge when festive */}
       <FairyLights isWinterActive={isWinterActive} onBulbClick={onBulbClick} />
 
       <nav
@@ -33,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           position: 'relative'
         }}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo - Authentic Start.ng */}
         <a
           href="/"
           className="logo"
@@ -59,7 +67,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               height: '28px',
               borderRadius: '7px',
               backgroundColor: 'var(--lime)',
-              position: 'relative'
+              position: 'relative',
+              flexShrink: 0
             }}
           >
             {/* Play triangle */}
@@ -67,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <polygon points="4,2 12,7 4,12" fill="#292a23" />
             </svg>
 
-            {/* Winter Santa Hat on Logo Icon when Festive */}
+            {/* Winter Santa Hat perched on Logo Icon when Festive */}
             {isWinterActive && (
               <span
                 style={{
@@ -77,7 +86,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   fontSize: '1rem',
                   lineHeight: 1,
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
-                  transform: 'rotate(-12deg)'
+                  transform: 'rotate(-12deg)',
+                  pointerEvents: 'none'
                 }}
                 aria-hidden="true"
               >
@@ -90,26 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <b style={{ fontWeight: 800 }}>start</b>
             <span style={{ color: 'var(--muted)', fontWeight: 600 }}>.ng</span>
           </span>
-
-          {/* Winter wonderland pill tag */}
-          {isWinterActive && (
-            <span
-              style={{
-                fontFamily: 'var(--mono)',
-                fontSize: '0.66rem',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                background: 'var(--lime)',
-                color: 'var(--on-lime)',
-                padding: '2px 7px',
-                borderRadius: '999px',
-                marginLeft: '4px'
-              }}
-            >
-              Winter ❄️
-            </span>
-          )}
         </a>
 
         {/* Center / Desktop Nav Links */}
@@ -135,9 +125,37 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
         </div>
 
-        {/* Right Actions: Dark/Light Mode + Character Avatar */}
-        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          {/* Theme Toggle Button */}
+        {/* Right Actions: Winter Switcher + Dark/Light Theme + Avatar */}
+        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Winter Theme Quick Toggle */}
+          {setMode && (
+            <button
+              type="button"
+              onClick={handleToggleWinter}
+              aria-label={`Toggle winter theme (${isWinterActive ? 'Active' : 'Inactive'})`}
+              style={{
+                background: isWinterActive ? 'var(--lime)' : 'var(--card)',
+                color: isWinterActive ? 'var(--on-lime)' : 'var(--ink)',
+                border: '1.5px solid var(--line)',
+                borderRadius: '999px',
+                padding: '6px 12px',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: isWinterActive ? '2px 2px 0 var(--ink)' : 'none',
+                transition: 'all 0.2s ease'
+              }}
+              title="Click to toggle December Winter Wonderland theme"
+            >
+              <span>{isWinterActive ? '❄️' : '☃️'}</span>
+              <span>{isWinterActive ? 'Winter ON' : 'Winter OFF'}</span>
+            </button>
+          )}
+
+          {/* Theme Toggle Button (Light/Dark) */}
           <button
             type="button"
             className="theme-toggle-btn"
@@ -145,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             style={{
               background: 'var(--card)',
-              border: '1px solid var(--line)',
+              border: '1.5px solid var(--line)',
               borderRadius: '999px',
               padding: '6px 12px',
               fontSize: '0.85rem',
@@ -153,7 +171,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              color: 'var(--ink)'
+              color: 'var(--ink)',
+              transition: 'background 0.2s ease'
             }}
           >
             <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
@@ -175,9 +194,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.05rem',
+              fontSize: '1rem',
               cursor: 'pointer',
-              boxShadow: '2px 2px 0 var(--ink)'
+              boxShadow: '2px 2px 0 var(--ink)',
+              flexShrink: 0
             }}
           >
             {isWinterActive ? '🧤' : '👾'}

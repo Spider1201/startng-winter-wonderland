@@ -1,53 +1,36 @@
 /* ==========================================================================
-   Hero Section & Winter Landscape Styles
+   Hero Section & Winter Landscape Styles (High Contrast & Centered Hierarchy)
    ========================================================================== */
 
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: 80px 24px 100px;
+  padding: 64px 24px 80px;
   text-align: center;
-  transition: background 0.4s ease, color 0.4s ease;
+  background: transparent;
 }
 
-/* Winter Twilight / Aurora Atmosphere */
+/* Subtle, soft winter glow around outer edges in winter mode (zero impact on text readability) */
 :root[data-seasonal-theme='winter'] .hero-section {
-  background: var(--hero-winter-gradient);
-  color: var(--hero-winter-text);
-  padding-bottom: 130px;
+  background: radial-gradient(ellipse at 50% -10%, rgba(216, 253, 113, 0.08) 0%, rgba(225, 247, 255, 0.06) 45%, transparent 70%);
+  padding-bottom: 96px;
 }
 
-:root[data-seasonal-theme='winter'] .hero-section .lead {
-  color: var(--hero-winter-muted);
-}
-
-:root[data-seasonal-theme='winter'] .hero-section .eyebrow {
-  color: var(--lime);
-}
-
-/* Hero Content Grid (Headline on Left/Center, Snowman beside CTA) */
+/* Centered Hero Content Layout - Matching Start.ng's authentic spacious design */
 .hero-content-layout {
   position: relative;
   z-index: 10;
-  max-width: var(--container-max);
+  max-width: 780px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-@media (min-width: 900px) {
-  :root[data-seasonal-theme='winter'] .hero-content-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(240px, 320px);
-    align-items: center;
-    gap: 40px;
-    text-align: left;
-  }
+  text-align: center;
 }
 
 .hero-text-block {
-  max-width: 680px;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -60,53 +43,38 @@
   font-weight: 700;
 }
 
+/* Clear, High-Contrast Headline */
 .hero-headline {
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 8vw, 5.8rem);
+  font-size: clamp(2.8rem, 8.5vw, 5.8rem);
   line-height: 0.98;
   letter-spacing: -0.055em;
   font-weight: 800;
-  margin: 0 0 28px;
-  color: inherit;
+  margin: 0 0 24px;
+  color: var(--ink);
 }
 
-/* Start.ng Signature Mark Highlight */
+/* Start.ng Signature Mark Highlight - Perfectly legible with electric lime underline */
 mark {
   background: linear-gradient(transparent 62%, var(--lime) 62%, var(--lime) 92%, transparent 92%);
   color: inherit;
-  padding: 0 0.08em;
-}
-
-:root[data-seasonal-theme='winter'] mark {
-  background: linear-gradient(transparent 58%, rgba(216, 253, 113, 0.95) 58%, rgba(216, 253, 113, 0.95) 92%, transparent 92%);
-  color: #18221b;
+  padding: 0 0.06em;
 }
 
 .lead {
   color: var(--muted);
   font-size: 1.2rem;
   line-height: 1.68;
-  margin: 0 auto 36px;
-  max-width: 580px;
-}
-
-@media (min-width: 900px) {
-  :root[data-seasonal-theme='winter'] .lead {
-    margin-left: 0;
-  }
+  margin: 0 auto 32px;
+  max-width: 600px;
 }
 
 .actions {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-@media (min-width: 900px) {
-  :root[data-seasonal-theme='winter'] .actions {
-    justify-content: flex-start;
-  }
+  align-items: center;
 }
 
 /* Start.ng Neo-brutalist Action Buttons */
@@ -147,20 +115,7 @@ mark {
 
 .btn.ghost:hover {
   border-color: var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-/* Winter Play Button with Snow Dusting Cap */
-:root[data-seasonal-theme='winter'] .btn.btn-play-winter {
-  background: var(--lime);
-  color: var(--on-lime);
-  border-color: #292a23;
-  box-shadow: 4px 4px 0 #ffffff;
-}
-
-:root[data-seasonal-theme='winter'] .btn.btn-play-winter:hover {
-  box-shadow: 6px 6px 0 #ffffff;
-  transform: translateY(-3px);
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 /* Subtle Snow Cap SVG Overlay on Play Button */
@@ -173,7 +128,7 @@ mark {
   pointer-events: none;
 }
 
-/* Snowman Character Wrapper inside Hero */
+/* Snowman Character Stage - Centered gracefully beneath the CTA on the snowy drift */
 .hero-snowman-stage {
   display: flex;
   flex-direction: column;
@@ -181,10 +136,25 @@ mark {
   justify-content: center;
   margin-top: 32px;
   position: relative;
+  z-index: 12;
 }
 
-@media (min-width: 900px) {
-  .hero-snowman-stage {
-    margin-top: 0;
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 48px 20px 64px;
+  }
+  .hero-headline {
+    font-size: clamp(2.4rem, 11vw, 3.6rem);
+  }
+  .lead {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+  .pine-garland {
+    width: 75px !important;
+    height: 60px !important;
+    opacity: 0.65 !important;
   }
 }
+

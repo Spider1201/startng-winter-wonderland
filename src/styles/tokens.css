@@ -94,22 +94,19 @@
    December Winter Wonderland Seasonal Enhancement Overrides
    ========================================================================== */
 :root[data-seasonal-theme='winter'] {
-  /* Rich, Whimsical Night Aurora & Winter Atmosphere */
-  --hero-winter-gradient: radial-gradient(circle at 50% -20%, #15372c 0%, #0c1a24 50%, #060c12 100%);
-  --hero-winter-text: #f8fafc;
-  --hero-winter-muted: #cbd5e1;
+  /* Subtle, elegant festive accents harmonized with Start.ng */
   --snow-drift-top: #ffffff;
   --snow-drift-bottom: #e2e8f0;
   --fairy-light-glow: rgba(216, 253, 113, 0.85);
 
-  /* Whimsical Seasonal Card Accent */
-  --winter-frost-border: rgba(216, 253, 113, 0.35);
-  --winter-frost-bg: rgba(255, 255, 255, 0.92);
+  /* Whimsical Seasonal Accents */
+  --winter-frost-border: rgba(216, 253, 113, 0.4);
+  --winter-frost-bg: var(--card);
 }
 
 :root[data-seasonal-theme='winter'][data-theme='dark'] {
-  --hero-winter-gradient: radial-gradient(circle at 50% -20%, #17382c 0%, #0a1722 55%, #050a10 100%);
-  --snow-drift-top: #e2e8f0;
+  --snow-drift-top: #33342c;
   --snow-drift-bottom: #292a23;
-  --winter-frost-bg: rgba(41, 42, 35, 0.94);
+  --winter-frost-bg: var(--card);
 }
+

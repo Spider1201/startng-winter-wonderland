@@ -46,31 +46,22 @@ export const App: React.FC = () => {
 
   return (
     <div className={`app-root ${isWinterActive ? 'theme-winter' : 'theme-standard'}`}>
-      {/* 1. Reviewer & Seasonal Theme Preview Controller Banner */}
-      <FestiveBanner
-        isWinterActive={isWinterActive}
-        mode={mode}
-        isNaturalDecember={isNaturalDecember}
-        hasUrlOverride={hasUrlOverride}
-        setMode={setMode}
-        isMuted={isMuted}
-        toggleSound={toggleSound}
-      />
-
-      {/* 2. Multi-depth Falling Snowfall Simulation (Canvas, pointer-events: none) */}
+      {/* 1. Multi-depth Falling Snowfall Simulation (Canvas, pointer-events: none) */}
       <SnowfallCanvas isWinterActive={isWinterActive} />
 
-      {/* 3. Navigation with Fairy Lights and Brand Identity */}
+      {/* 2. Unified Clean Navigation (positioned cleanly at top, no green sandwich boxes) */}
       <Navbar
         isWinterActive={isWinterActive}
         theme={theme}
         toggleTheme={toggleTheme}
         onBulbClick={playLightJingle}
+        mode={mode}
+        setMode={setMode}
       />
 
-      {/* 4. Main Page Content */}
+      {/* 3. Main Page Content */}
       <main id="main-content">
-        {/* Hero Section with Interactive Animated Snowman */}
+        {/* Hero Section with High-Contrast Centered Headline & Animated Snowman */}
         <HeroSection
           isWinterActive={isWinterActive}
           onSnowmanInteract={playSnowmanChime}
@@ -90,15 +81,26 @@ export const App: React.FC = () => {
         <AboutSection />
       </main>
 
-      {/* 5. Complete Footer */}
+      {/* 4. Complete Footer */}
       <Footer isWinterActive={isWinterActive} />
 
-      {/* 6. Playable Browser Mini-Game Modal */}
+      {/* 5. Playable Browser Mini-Game Modal */}
       <MiniGameModal
         game={activeGameModal}
         isOpen={isMiniGameOpen}
         onClose={handleCloseMiniGame}
         isWinterActive={isWinterActive}
+      />
+
+      {/* 6. Discreet Floating Reviewer Controller Widget (bottom-right) */}
+      <FestiveBanner
+        isWinterActive={isWinterActive}
+        mode={mode}
+        isNaturalDecember={isNaturalDecember}
+        hasUrlOverride={hasUrlOverride}
+        setMode={setMode}
+        isMuted={isMuted}
+        toggleSound={toggleSound}
       />
     </div>
   );

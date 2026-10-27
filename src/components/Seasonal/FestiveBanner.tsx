@@ -19,7 +19,7 @@ export const FestiveBanner: React.FC<FestiveBannerProps> = ({
   isMuted,
   toggleSound
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleCopyLink = () => {
@@ -33,117 +33,156 @@ export const FestiveBanner: React.FC<FestiveBannerProps> = ({
 
   return (
     <aside
-      className="festive-banner-bar"
-      aria-label="Seasonal Theme Preview Controller"
+      className="festive-floating-widget"
+      aria-label="Seasonal Theme Reviewer Controls"
       style={{
-        position: 'relative',
-        zIndex: 50,
-        background: isWinterActive ? '#152b22' : 'var(--card)',
-        color: isWinterActive ? '#f6f5ee' : 'var(--ink)',
-        borderBottom: '1.5px solid var(--line)',
-        padding: isCollapsed ? '6px 16px' : '8px 16px',
-        fontSize: '0.85rem',
-        transition: 'background 0.3s ease, color 0.3s ease'
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        zIndex: 55,
+        fontFamily: 'var(--font-sans)'
       }}
     >
-      <div
-        style={{
-          maxWidth: '1040px',
-          margin: '0 auto',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '8px 16px'
-        }}
-      >
-        {/* Left: Status info */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      {/* Collapsed Floating Pill Button */}
+      {!isOpen && (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          style={{
+            background: 'var(--card)',
+            color: 'var(--ink)',
+            border: '2px solid var(--ink)',
+            borderRadius: '999px',
+            padding: '8px 16px',
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            boxShadow: '4px 4px 0 var(--lime)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            transition: 'transform 0.15s ease, box-shadow 0.15s ease'
+          }}
+          title="Open Winter Theme Reviewer Controls"
+        >
+          <span style={{ fontSize: '1rem' }}>{isWinterActive ? '❄️' : '🎮'}</span>
+          <span>Theme: {isWinterActive ? 'Winter' : 'Standard'}</span>
           <span
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '24px',
-              height: '24px',
-              borderRadius: '50%',
-              backgroundColor: isWinterActive ? 'var(--lime)' : 'var(--line)',
-              color: '#292a23',
-              fontWeight: 800,
-              fontSize: '0.9rem'
+              fontSize: '0.72rem',
+              background: isWinterActive ? 'var(--lime)' : 'var(--line)',
+              color: 'var(--on-lime)',
+              padding: '1px 6px',
+              borderRadius: '999px',
+              fontFamily: 'var(--mono)',
+              fontWeight: 800
             }}
           >
-            {isWinterActive ? '❄️' : '🎮'}
+            ⚙️
           </span>
-          <div>
-            <strong style={{ fontWeight: 700 }}>
-              {isWinterActive ? 'December Winter Wonderland' : 'Standard Start.ng Theme'}
-            </strong>
-            {!isCollapsed && (
-              <span
-                style={{
-                  marginLeft: '8px',
-                  color: isWinterActive ? '#a7f3d0' : 'var(--muted)',
-                  fontSize: '0.78rem',
-                  fontFamily: 'var(--mono)'
-                }}
-              >
-                {isNaturalDecember
-                  ? '(Active via calendar: Dec 1–31)'
-                  : mode === 'winter-preview'
-                    ? '(Reviewer Preview Active · ?winterPreview=1)'
-                    : '(Calendar mode: Normal outside Dec)'}
-              </span>
-            )}
-          </div>
-        </div>
+        </button>
+      )}
 
-        {/* Right: Controls & Switcher */}
-        {!isCollapsed && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            {/* 3-way Mode Segmented Buttons */}
+      {/* Expanded Reviewer Controller Card */}
+      {isOpen && (
+        <div
+          style={{
+            background: 'var(--card)',
+            color: 'var(--ink)',
+            border: '2px solid var(--ink)',
+            borderRadius: '16px',
+            padding: '18px 20px',
+            boxShadow: '6px 6px 0 var(--lime), 0 16px 36px rgba(0, 0, 0, 0.2)',
+            width: '320px',
+            maxWidth: 'calc(100vw - 32px)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
+            animation: 'bubble-pop-in 0.25s ease-out'
+          }}
+        >
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '1.2rem' }}>🎄</span>
+              <div>
+                <strong style={{ fontSize: '0.95rem', fontWeight: 800, display: 'block' }}>
+                  Winter Theme Controls
+                </strong>
+                <span style={{ fontSize: '0.74rem', color: 'var(--muted)', fontFamily: 'var(--mono)' }}>
+                  {isNaturalDecember
+                    ? 'Dec 1–31 (Active by date)'
+                    : mode === 'winter-preview'
+                      ? 'Preview mode (?winterPreview=1)'
+                      : 'Standard theme active'}
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--muted)',
+                fontSize: '1.2rem',
+                cursor: 'pointer',
+                padding: '2px 6px',
+                lineHeight: 1
+              }}
+              aria-label="Close reviewer controls"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* 3-way Mode Segmented Control */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              Activation Mode
+            </span>
             <div
               style={{
-                display: 'inline-flex',
-                background: isWinterActive ? '#0d1e17' : 'var(--bg)',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                background: 'var(--bg)',
                 border: '1px solid var(--line)',
-                borderRadius: '999px',
-                padding: '2px'
+                borderRadius: '8px',
+                padding: '2px',
+                gap: '2px'
               }}
             >
               <button
                 type="button"
                 onClick={() => setMode('winter-preview')}
                 style={{
-                  background: mode === 'winter-preview' ? 'var(--lime)' : 'none',
-                  color: mode === 'winter-preview' ? 'var(--on-lime)' : 'inherit',
+                  background: mode === 'winter-preview' ? 'var(--lime)' : 'transparent',
+                  color: mode === 'winter-preview' ? 'var(--on-lime)' : 'var(--ink)',
                   border: 'none',
-                  borderRadius: '999px',
-                  padding: '4px 12px',
-                  fontSize: '0.78rem',
+                  borderRadius: '6px',
+                  padding: '6px 4px',
+                  fontSize: '0.74rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  transition: 'background 0.2s'
+                  textAlign: 'center'
                 }}
-                title="Force December Winter Wonderland theme (?winterPreview=1)"
               >
-                ❄️ Winter Mode
+                ❄️ Winter
               </button>
               <button
                 type="button"
                 onClick={() => setMode('normal-force')}
                 style={{
-                  background: mode === 'normal-force' ? 'var(--lime)' : 'none',
-                  color: mode === 'normal-force' ? 'var(--on-lime)' : 'inherit',
+                  background: mode === 'normal-force' ? 'var(--lime)' : 'transparent',
+                  color: mode === 'normal-force' ? 'var(--on-lime)' : 'var(--ink)',
                   border: 'none',
-                  borderRadius: '999px',
-                  padding: '4px 12px',
-                  fontSize: '0.78rem',
+                  borderRadius: '6px',
+                  padding: '6px 4px',
+                  fontSize: '0.74rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  transition: 'background 0.2s'
+                  textAlign: 'center'
                 }}
-                title="Force Normal homepage theme (?winterPreview=0)"
               >
                 Normal
               </button>
@@ -151,84 +190,69 @@ export const FestiveBanner: React.FC<FestiveBannerProps> = ({
                 type="button"
                 onClick={() => setMode('auto')}
                 style={{
-                  background: mode === 'auto' ? 'var(--lime)' : 'none',
-                  color: mode === 'auto' ? 'var(--on-lime)' : 'inherit',
+                  background: mode === 'auto' ? 'var(--lime)' : 'transparent',
+                  color: mode === 'auto' ? 'var(--on-lime)' : 'var(--ink)',
                   border: 'none',
-                  borderRadius: '999px',
-                  padding: '4px 12px',
-                  fontSize: '0.78rem',
+                  borderRadius: '6px',
+                  padding: '6px 4px',
+                  fontSize: '0.74rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  transition: 'background 0.2s'
+                  textAlign: 'center'
                 }}
-                title="Auto calendar rule (Active Dec 1–31 only)"
               >
-                Auto (Calendar)
+                Auto
               </button>
             </div>
+          </div>
 
-            {/* Optional Sound chime toggle */}
-            {isWinterActive && (
+          {/* Audio Chime Toggle */}
+          {isWinterActive && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '4px' }}>
+              <span style={{ fontSize: '0.82rem', fontWeight: 600 }}>Snowman Chimes</span>
               <button
                 type="button"
                 onClick={toggleSound}
                 style={{
-                  background: isMuted ? 'transparent' : 'var(--lime)',
-                  color: isMuted ? 'inherit' : 'var(--on-lime)',
+                  background: isMuted ? 'var(--bg)' : 'var(--lime)',
+                  color: isMuted ? 'var(--muted)' : 'var(--on-lime)',
                   border: '1px solid var(--line)',
                   borderRadius: '999px',
                   padding: '4px 10px',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px'
+                  fontSize: '0.76rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
                 }}
-                title={isMuted ? 'Click to enable snowman chimes' : 'Mute winter chimes'}
               >
-                {isMuted ? '🔇 Audio Off' : '🔔 Audio On'}
+                {isMuted ? '🔇 Off' : '🔔 On'}
               </button>
-            )}
+            </div>
+          )}
 
-            {/* Share Preview Link */}
-            <button
-              type="button"
-              onClick={handleCopyLink}
-              style={{
-                background: 'transparent',
-                color: 'inherit',
-                border: '1px solid var(--line)',
-                borderRadius: '999px',
-                padding: '4px 10px',
-                fontSize: '0.78rem',
-                cursor: 'pointer'
-              }}
-              title="Copy preview URL with ?winterPreview=1"
-            >
-              {copied ? '✓ Link Copied' : '🔗 Copy Preview Link'}
-            </button>
-          </div>
-        )}
-
-        {/* Collapse toggle */}
-        <button
-          type="button"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'inherit',
-            cursor: 'pointer',
-            padding: '2px 6px',
-            fontSize: '0.75rem',
-            opacity: 0.7
-          }}
-          aria-label={isCollapsed ? 'Expand banner' : 'Collapse banner'}
-        >
-          {isCollapsed ? '▼ Show Controls' : '▲ Hide'}
-        </button>
-      </div>
+          {/* Copy Preview Link */}
+          <button
+            type="button"
+            onClick={handleCopyLink}
+            style={{
+              background: 'var(--bg)',
+              color: 'var(--ink)',
+              border: '1.5px solid var(--line)',
+              borderRadius: '8px',
+              padding: '7px 12px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              marginTop: '4px'
+            }}
+          >
+            <span>{copied ? '✓ Copied to clipboard!' : '🔗 Copy ?winterPreview=1 Link'}</span>
+          </button>
+        </div>
+      )}
     </aside>
   );
 };
