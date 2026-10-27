@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Snowman Interactive Character Styles
+   ========================================================================== */
+
+.snowman-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.snowman-wrapper:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 6px;
+  border-radius: 24px;
+}
+
+/* Character Figure */
+.snowman-figure {
+  width: 220px;
+  height: 270px;
+  transform-origin: bottom center;
+  animation: snowman-idle 5.5s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 640px) {
+  .snowman-figure {
+    width: 170px;
+    height: 215px;
+  }
+}
+
+/* Bounce Animation when Clicked */
+.snowman-figure.is-bouncing {
+  animation: snowman-bounce-jump 0.75s cubic-bezier(0.25, 1.4, 0.5, 1) forwards !important;
+}
+
+/* Hover Wave Effect on Desktop */
+@media (hover: hover) {
+  .snowman-wrapper:hover .snowman-figure:not(.is-bouncing) {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .snowman-wrapper:hover .snowman-arm-right {
+    animation: snowman-wave-arm 1.4s ease-in-out infinite;
+    transform-origin: 155px 125px;
+  }
+
+  .snowman-wrapper:hover .snowman-sparkles {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Waving state triggered explicitly */
+.snowman-arm-right.is-waving {
+  animation: snowman-wave-arm 1.4s ease-in-out infinite;
+  transform-origin: 155px 125px;
+}
+
+/* Eye Blink Animation */
+.snowman-eyes {
+  transform-origin: 100px 75px;
+  animation: snowman-blink 4.2s infinite ease-in-out;
+}
+
+/* Scarf Fringe */
+.snowman-scarf-fringe {
+  transform-origin: 112px 118px;
+  animation: scarf-flutter 3s ease-in-out infinite;
+}
+
+/* Sparkle accents */
+.snowman-sparkles {
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Interactive Speech Bubble */
+.snowman-speech-bubble {
+  position: absolute;
+  bottom: calc(100% - 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  padding: 14px 18px 14px 16px;
+  box-shadow: 5px 5px 0 var(--lime), 0 12px 28px rgba(0, 0, 0, 0.2);
+  z-index: 25;
+  animation: bubble-pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  pointer-events: auto;
+  text-align: left;
+}
+
+.snowman-speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 9px 8px 0 8px;
+  border-style: solid;
+  border-color: var(--ink) transparent transparent transparent;
+}
+
+.snowman-speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 7px 0 7px;
+  border-style: solid;
+  border-color: var(--card) transparent transparent transparent;
+  z-index: 1;
+}
+
+.speech-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.speech-badge {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: var(--on-lime);
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.speech-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.speech-close:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.speech-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.speech-subtext {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.speech-click-hint {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--line);
+  opacity: 0.85;
+}
+
+/* Floating Snow Confetti Particles */
+.snow-burst-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.snow-burst-particle {
+  position: absolute;
+  will-change: transform, opacity;
+  animation: particle-burst 0.85s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+}
+
+/* Snow Base Shadow */
+.snowman-ground-shadow {
+  width: 140px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0) 70%);
+  margin-top: -12px;
+  pointer-events: none;
+}

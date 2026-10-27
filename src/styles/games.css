@@ -1,0 +1,377 @@
+/* ==========================================================================
+   Games Shelf, Neo-brutalist Cards & GOTW Banner Styles
+   ========================================================================== */
+
+#games {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.section-head h2 {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  margin: 0;
+  color: var(--ink);
+}
+
+.games-count-badge {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Category Filter Chips */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.filter-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: 600 0.88rem var(--font-sans);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--ink);
+}
+
+.filter-chip.active {
+  background: var(--ink);
+  color: var(--on-solid);
+  border-color: var(--ink);
+  box-shadow: 2px 2px 0 var(--lime);
+}
+
+/* Game Cards Grid */
+.games-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+@media (max-width: 600px) {
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Neo-brutalist Game Card */
+.game-card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--ink);
+  box-shadow: 5px 6px 0 var(--lime);
+}
+
+/* Winter Frost Border Accent */
+:root[data-seasonal-theme='winter'] .game-card {
+  background: var(--card);
+  border-color: var(--line);
+}
+
+:root[data-seasonal-theme='winter'] .game-card:hover {
+  box-shadow: 6px 7px 0 var(--lime);
+}
+
+/* Game Art Banner */
+.game-card-art {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.game-card-emoji {
+  font-size: 3.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+  transition: transform 0.25s ease;
+}
+
+.game-card:hover .game-card-emoji {
+  transform: scale(1.15) rotate(4deg);
+}
+
+.game-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(41, 42, 35, 0.85);
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+}
+
+.game-card-festive-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  background: var(--lime);
+  color: var(--on-lime);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Card Info */
+.game-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.game-card-title {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.game-card-creator {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.game-card-creator b {
+  color: var(--ink);
+}
+
+.game-card-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 4px 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Meta Footer */
+.game-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.game-card-plays {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+}
+
+.game-card-play-btn {
+  font-weight: 800;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Game of the Week (GOTW) Spotlight Banner */
+.gotw-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  margin: 24px 0 44px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--code-bg);
+  color: #f6f5ee;
+  box-shadow: 8px 8px 0 var(--lime);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.gotw-banner:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 760px) {
+  .gotw-banner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gotw-cover {
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1f402c, #0d1e17);
+  overflow: hidden;
+}
+
+.gotw-emoji-hero {
+  font-size: 6rem;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
+  z-index: 2;
+}
+
+.gotw-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 36px 40px;
+}
+
+.gotw-badge {
+  background: var(--lime);
+  color: #292a23;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.gotw-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: #f6f5ee;
+}
+
+.gotw-desc {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 44ch;
+}
+
+.gotw-cta {
+  align-self: flex-start;
+  margin-top: 8px;
+  background: var(--lime);
+  color: #292a23;
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.98rem;
+}
+
+.gotw-cta:hover {
+  background: #cbf94e;
+}
+
+/* A-Z Games Accordion */
+.az-games {
+  margin-top: 36px;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.az-games > summary {
+  padding: 16px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  color: var(--ink);
+}
+
+.az-games > summary:hover {
+  background: var(--shimmer);
+}
+
+.az-games-list {
+  list-style: none;
+  margin: 0;
+  padding: 12px 20px 20px;
+  columns: 3 200px;
+  column-gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .az-games-list {
+    columns: 2 150px;
+  }
+}
+
+.az-games-list li {
+  padding: 6px 0;
+  break-inside: avoid;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.az-games-list li span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}

@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Whimsical Seasonal Keyframes & Micro-Animations
+   ========================================================================== */
+
+/* Snowman Idle Breathing & Gentle Sway */
+@keyframes snowman-idle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-2px) rotate(1.2deg);
+  }
+}
+
+/* Snowman Natural Eye Blink */
+@keyframes snowman-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* Snowman Playful Wave on Hover */
+@keyframes snowman-wave-arm {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-24deg);
+  }
+  40% {
+    transform: rotate(-8deg);
+  }
+  60% {
+    transform: rotate(-26deg);
+  }
+  80% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Snowman Delightful Click Bounce / Jump */
+@keyframes snowman-bounce-jump {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  15% {
+    transform: scale(1.15, 0.85) translateY(4px);
+  }
+  45% {
+    transform: scale(0.9, 1.15) translateY(-28px) rotate(-3deg);
+  }
+  70% {
+    transform: scale(1.05, 0.95) translateY(0) rotate(2deg);
+  }
+  85% {
+    transform: scale(0.98, 1.02) translateY(-6px);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0) rotate(0deg);
+  }
+}
+
+/* Scarf Fringe Flutter */
+@keyframes scarf-flutter {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(6deg) skewX(2deg);
+  }
+}
+
+/* Speech Bubble Pop In */
+@keyframes bubble-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(12px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04) translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Fairy Lights Gentle Warm Twinkle */
+@keyframes light-glow-pulse {
+  0%, 100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px var(--light-color, #ffeaa7));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px var(--light-color, #d8fd71)) brightness(1.2);
+  }
+}
+
+@keyframes light-sway {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* Snowflake Confetti Burst Particle Fade */
+@keyframes particle-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.2) rotate(var(--rot));
+  }
+}
+
+/* Frost Shimmer across CTA */
+@keyframes frost-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Floating Banner Gentle Float */
+@keyframes banner-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* ==========================================================================
+   Prefers Reduced Motion Overrides
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .snowman-figure,
+  .snowman-arm-right,
+  .snowman-eyes,
+  .fairy-bulb,
+  .snow-canvas {
+    animation: none !important;
+  }
+}

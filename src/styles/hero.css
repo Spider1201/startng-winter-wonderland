@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Hero Section & Winter Landscape Styles
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 100px;
+  text-align: center;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Winter Twilight / Aurora Atmosphere */
+:root[data-seasonal-theme='winter'] .hero-section {
+  background: var(--hero-winter-gradient);
+  color: var(--hero-winter-text);
+  padding-bottom: 130px;
+}
+
+:root[data-seasonal-theme='winter'] .hero-section .lead {
+  color: var(--hero-winter-muted);
+}
+
+:root[data-seasonal-theme='winter'] .hero-section .eyebrow {
+  color: var(--lime);
+}
+
+/* Hero Content Grid (Headline on Left/Center, Snowman beside CTA) */
+.hero-content-layout {
+  position: relative;
+  z-index: 10;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  :root[data-seasonal-theme='winter'] .hero-content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(240px, 320px);
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+  }
+}
+
+.hero-text-block {
+  max-width: 680px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.82rem;
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 8vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+  margin: 0 0 28px;
+  color: inherit;
+}
+
+/* Start.ng Signature Mark Highlight */
+mark {
+  background: linear-gradient(transparent 62%, var(--lime) 62%, var(--lime) 92%, transparent 92%);
+  color: inherit;
+  padding: 0 0.08em;
+}
+
+:root[data-seasonal-theme='winter'] mark {
+  background: linear-gradient(transparent 58%, rgba(216, 253, 113, 0.95) 58%, rgba(216, 253, 113, 0.95) 92%, transparent 92%);
+  color: #18221b;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.68;
+  margin: 0 auto 36px;
+  max-width: 580px;
+}
+
+@media (min-width: 900px) {
+  :root[data-seasonal-theme='winter'] .lead {
+    margin-left: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  :root[data-seasonal-theme='winter'] .actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Start.ng Neo-brutalist Action Buttons */
+.btn {
+  background: var(--ink);
+  color: var(--on-solid);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 13px 26px;
+  font: 700 1rem var(--font-sans);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--lime);
+}
+
+.btn:hover {
+  background: var(--solid-hover);
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--lime);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0 var(--lime);
+}
+
+.btn.ghost {
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  box-shadow: none;
+}
+
+.btn.ghost:hover {
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* Winter Play Button with Snow Dusting Cap */
+:root[data-seasonal-theme='winter'] .btn.btn-play-winter {
+  background: var(--lime);
+  color: var(--on-lime);
+  border-color: #292a23;
+  box-shadow: 4px 4px 0 #ffffff;
+}
+
+:root[data-seasonal-theme='winter'] .btn.btn-play-winter:hover {
+  box-shadow: 6px 6px 0 #ffffff;
+  transform: translateY(-3px);
+}
+
+/* Subtle Snow Cap SVG Overlay on Play Button */
+.snow-cap-crest {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  right: 12px;
+  height: 10px;
+  pointer-events: none;
+}
+
+/* Snowman Character Wrapper inside Hero */
+.hero-snowman-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .hero-snowman-stage {
+    margin-top: 0;
+  }
+}

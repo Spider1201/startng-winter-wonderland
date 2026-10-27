@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Start.ng Design System & Seasonal Theme Tokens
+   ========================================================================== */
+
+:root {
+  /* Start.ng Core Palette (Light Mode Default) */
+  --bg: #f6f5ee;
+  --card: #fffefa;
+  --ink: #292a23;
+  --muted: #6b6c63;
+  --line: #e4e2d6;
+  --lime: #d8fd71;
+  --on-lime: #292a23;
+  --on-solid: #ffffff;
+  --on-solid-accent: var(--lime);
+  --solid-hover: #000000;
+  --scrim: rgba(41, 42, 35, 0.45);
+  --shimmer: #efede2;
+  --code-bg: #292a23;
+  --legendary-bg: #fafff0;
+  --banner-tint: #f1fbd2;
+  --dot: rgba(41, 42, 35, 0.16);
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Rarity Colors */
+  --r-common: #75766c;
+  --r-uncommon: #278546;
+  --r-rare: #346fdf;
+  --r-epic: #8e4fd6;
+  --r-legendary: #a9630a;
+  --r-limited: #db2967;
+
+  /* Layout */
+  --container-max: 1040px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Standard Neo-brutalist Shadows */
+  --shadow-sm: 3px 3px 0 var(--lime);
+  --shadow-md: 5px 5px 0 var(--lime);
+  --shadow-lg: 8px 8px 0 var(--lime);
+  --shadow-ink: 4px 4px 0 var(--ink);
+
+  /* Seasonal Tokens (Neutral outside December) */
+  --festive-accent: var(--lime);
+  --festive-gold: #f9ca24;
+  --festive-berry: #eb4d4b;
+  --festive-pine: #1b4d3e;
+  --festive-ice: #dff9fb;
+  --snow-drift-top: #ffffff;
+  --snow-drift-bottom: #eef5f8;
+  --hero-winter-gradient: transparent;
+  --fairy-light-glow: rgba(216, 253, 113, 0.6);
+
+  color-scheme: light;
+}
+
+/* Dark Mode (Start.ng Official Dark Palette) */
+:root[data-theme='dark'] {
+  --bg: #292a23;
+  --card: #33342c;
+  --ink: #f6f5ee;
+  --muted: #b0b1a6;
+  --line: #4a4b41;
+  --text-2: #dedcd0;
+  --on-solid: #292a23;
+  --on-solid-accent: #292a23;
+  --solid-hover: #ffffff;
+  --scrim: rgba(20, 21, 17, 0.65);
+  --shimmer: #44453b;
+  --code-bg: #1f201b;
+  --legendary-bg: #38402a;
+  --banner-tint: #343b27;
+  --dot: rgba(246, 245, 238, 0.12);
+
+  --r-common: #a6a79b;
+  --r-uncommon: #5fcf82;
+  --r-rare: #6f9bf0;
+  --r-epic: #b383ef;
+  --r-legendary: #f5a640;
+  --r-limited: #f27aa3;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   December Winter Wonderland Seasonal Enhancement Overrides
+   ========================================================================== */
+:root[data-seasonal-theme='winter'] {
+  /* Rich, Whimsical Night Aurora & Winter Atmosphere */
+  --hero-winter-gradient: radial-gradient(circle at 50% -20%, #15372c 0%, #0c1a24 50%, #060c12 100%);
+  --hero-winter-text: #f8fafc;
+  --hero-winter-muted: #cbd5e1;
+  --snow-drift-top: #ffffff;
+  --snow-drift-bottom: #e2e8f0;
+  --fairy-light-glow: rgba(216, 253, 113, 0.85);
+
+  /* Whimsical Seasonal Card Accent */
+  --winter-frost-border: rgba(216, 253, 113, 0.35);
+  --winter-frost-bg: rgba(255, 255, 255, 0.92);
+}
+
+:root[data-seasonal-theme='winter'][data-theme='dark'] {
+  --hero-winter-gradient: radial-gradient(circle at 50% -20%, #17382c 0%, #0a1722 55%, #050a10 100%);
+  --snow-drift-top: #e2e8f0;
+  --snow-drift-bottom: #292a23;
+  --winter-frost-bg: rgba(41, 42, 35, 0.94);
+}
